@@ -9,7 +9,11 @@ import { ActionBar } from "./components/ActionBar.jsx";
 import "@esri/calcite-components/dist/components/calcite-panel.js";
 import "@esri/calcite-components/dist/components/calcite-shell.js";
 import "@esri/calcite-components/dist/components/calcite-shell-panel.js";
-import { CalciteShell, CalcitePanel, CalciteShellPanel } from "@esri/calcite-components-react";
+import {
+  CalciteShell,
+  CalcitePanel,
+  CalciteShellPanel,
+} from "@esri/calcite-components-react";
 
 import "./App.css";
 
@@ -35,7 +39,7 @@ function App() {
         map: webscene,
       });
 
-      setView(view)
+      setView(view);
 
       view.when(() => {
         console.log("View loaded");
@@ -45,15 +49,26 @@ function App() {
           container: "layers-container",
         });
       });
+
+      // Temporary workaround
+      // return () => {
+      //   if (view) {
+      //     view.destroy();
+      //   }
+      // };
     }
   }, [mapDiv]);
 
   return (
     <CalciteShell content-behind id="calcite-shell">
       <CalciteShellPanel slot="panel-start" displayMode="float">
-
         <ActionBar view={view} />
-        <CalcitePanel heading="Layers" height-scale="l" data-panel-id="layers" hidden>
+        <CalcitePanel
+          heading="Layers"
+          height-scale="l"
+          data-panel-id="layers"
+          hidden
+        >
           <div id="layers-container"></div>
         </CalcitePanel>
       </CalciteShellPanel>
